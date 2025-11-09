@@ -4,6 +4,7 @@ import { AppService } from './app.service';
 import { IncomeModule } from './income/income.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
+import { ExpenseModule } from './expense/expense.module';
 
 @Module({
   imports: [
@@ -22,6 +23,8 @@ import { ConfigModule } from '@nestjs/config';
     }),
 
     IncomeModule,
+
+    ExpenseModule,
   ],
   controllers: [AppController],
   providers: [AppService],
