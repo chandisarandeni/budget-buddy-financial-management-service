@@ -11,6 +11,8 @@ export class ExpenseService {
     @InjectRepository(Expense)
     private readonly expenseRepository: Repository<Expense>,
   ) {}
+
+  // CREATE NEW EXPENSE
   create(createExpenseDto: CreateExpenseDto) {
     //  if amount <= 0
     if (createExpenseDto.amount <= 0) {
@@ -18,7 +20,13 @@ export class ExpenseService {
     }
 
     // Check all required fields are present
-    const requiredFields = ['description', 'amount', 'date', 'category'];
+    const requiredFields = [
+      'amount',
+      'payment_method',
+      'category',
+      'expenseDate',
+      'userId',
+    ];
     for (const field of requiredFields) {
       if (!createExpenseDto[field]) {
         throw new Error(`Field ${field} is required`);
@@ -30,19 +38,35 @@ export class ExpenseService {
     return this.expenseRepository.save(expense);
   }
 
+  // GET ALL EXPENSES
   findAll() {
-    return `This action returns all expense`;
+    return this.expenseRepository.find();
   }
 
+  // GET EXPENSE BY ID
   findOne(id: number) {
-    return `This action returns a #${id} expense`;
+    return this.expenseRepository.findOneBy({ id });
   }
 
+  // UPDATE EXPENSE BY ID
   update(id: number, updateExpenseDto: UpdateExpenseDto) {
-    return `This action updates a #${id} expense`;
+    // Check if expense exists
+    if (!this.expenseRepository.findOneBy({ id })) {
+      throw new Error(`Expense with ID ${id} not found`);
+    }
+
+    // update expense
+    this.expenseRepository.update(id, updateExpenseDto);
+    return this.expenseRepository.findOneBy({ id });
   }
 
+  // DELETE EXPENSE BY ID
   remove(id: number) {
-    return `This action removes a #${id} expense`;
+    // Check if expense exists
+    if (!this.expenseRepository.findOneBy({ id })) {
+      throw new Error(`Expense with ID ${id} not found`);
+    }
+
+    return this.expenseRepository.delete(id);
   }
 }
