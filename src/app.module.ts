@@ -5,21 +5,30 @@ import { IncomeModule } from './income/income.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
 import { ExpenseModule } from './expense/expense.module';
+import { DataSourceOptions } from 'typeorm';
 
 @Module({
   imports: [
+    // Load .env variables globally
     ConfigModule.forRoot({ isGlobal: true }),
 
-    TypeOrmModule.forRoot({
-      type: 'oracle',
-      host: process.env.ORACLE_HOST,
-      port: Number(process.env.ORACLE_PORT),
-      username: process.env.ORACLE_USERNAME,
-      password: process.env.ORACLE_PASSWORD,
-      sid: process.env.ORACLE_SID,
-      synchronize: true,
-      entities: [__dirname + '/**/*.entity{.ts,.js}'],
-      logging: true,
+    // Oracle Database Connection (with serviceName)
+    TypeOrmModule.forRootAsync({
+      useFactory: (): 
+      DataSourceOptions => ({
+        type: 'oracle',
+        host: process.env.ORACLE_HOST,
+        port: Number(process.env.ORACLE_PORT),
+        username: process.env.ORACLE_USERNAME,
+        password: process.env.ORACLE_PASSWORD,
+        serviceName: process.env.ORACLE_SERVICE_NAME,
+        synchronize: true,
+        entities: [__dirname + '/**/*.entity{.ts,.js}'],
+        logging: true,
+        extra: {
+          connectString: `${process.env.ORACLE_HOST}:${process.env.ORACLE_PORT}/${process.env.ORACLE_SERVICE_NAME}`,
+        },
+      }),
     }),
 
     IncomeModule,
