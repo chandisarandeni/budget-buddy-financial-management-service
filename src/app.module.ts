@@ -6,6 +6,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
 import { ExpenseModule } from './expense/expense.module';
 import { DataSourceOptions } from 'typeorm';
+import { SavingModule } from './saving/saving.module';
 
 @Module({
   imports: [
@@ -34,6 +35,8 @@ import { DataSourceOptions } from 'typeorm';
     IncomeModule,
 
     ExpenseModule,
+
+    SavingModule,
   ],
   controllers: [AppController],
   providers: [AppService],
