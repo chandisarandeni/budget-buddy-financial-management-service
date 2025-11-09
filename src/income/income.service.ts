@@ -33,6 +33,11 @@ export class IncomeService {
     return this.incomeRepository.find();
   }
 
+  // FIND INCOME BY USER ID
+  findByUserId(userId: number) {
+    return this.incomeRepository.find({ where: { userId } });
+  }
+
   findOne(id: number) {
     return this.incomeRepository.findOneBy({ id });
   }

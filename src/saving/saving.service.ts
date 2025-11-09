@@ -37,6 +37,11 @@ export class SavingService {
     return this.savingRepository.find();
   }
 
+  // FIND SAVING BY USER ID
+  findByUserId(userId: number) {
+    return this.savingRepository.find({ where: { userId } });
+  }
+
   // GET SAVING BY ID
   findOne(id: number) {
     return this.savingRepository.findOneBy({ id });

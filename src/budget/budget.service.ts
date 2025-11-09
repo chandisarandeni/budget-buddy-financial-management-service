@@ -35,6 +35,11 @@ export class BudgetService {
     return this.budgetRepository.find();
   }
 
+  // GET BUDGETS BY USER ID
+  findByUserId(userId: number) {
+    return this.budgetRepository.find({ where: { userId } });
+  }
+
   // GET A BUDGET BY ID
   findOne(id: number) {
     return this.budgetRepository.findOneBy({ id });

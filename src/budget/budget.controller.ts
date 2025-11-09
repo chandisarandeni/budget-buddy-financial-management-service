@@ -27,6 +27,12 @@ export class BudgetController {
     return this.budgetService.findAll();
   }
 
+  // GET BUDGETS BY USER ID
+  @Get('user/:userId')
+  findByUserId(@Param('userId') userId: string) {
+    return this.budgetService.findByUserId(+userId);
+  }
+
   // GET A BUDGET BY ID
   @Get(':id')
   findOne(@Param('id') id: string) {
