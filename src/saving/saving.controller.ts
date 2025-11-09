@@ -11,7 +11,7 @@ import { SavingService } from './saving.service';
 import { CreateSavingDto } from './dto/create-saving.dto';
 import { UpdateSavingDto } from './dto/update-saving.dto';
 
-@Controller('savings')
+@Controller('saving')
 export class SavingController {
   constructor(private readonly savingService: SavingService) {}
 
@@ -25,6 +25,12 @@ export class SavingController {
   @Get()
   findAll() {
     return this.savingService.findAll();
+  }
+
+  // FIND SAVING BY USER ID
+  @Get('user/:userId')
+  findByUserId(@Param('userId') userId: string) {
+    return this.savingService.findByUserId(+userId);
   }
 
   // GET SAVING BY ID
