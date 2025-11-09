@@ -43,6 +43,11 @@ export class ExpenseService {
     return this.expenseRepository.find();
   }
 
+  // FIND EXPENSE BY USER ID
+  findByUserId(userId: number) {
+    return this.expenseRepository.find({ where: { userId } });
+  }
+
   // GET EXPENSE BY ID
   findOne(id: number) {
     return this.expenseRepository.findOneBy({ id });
