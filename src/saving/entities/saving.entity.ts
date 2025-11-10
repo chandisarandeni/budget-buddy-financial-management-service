@@ -1,4 +1,9 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
 
 @Entity('savings')
 export class Saving {
@@ -20,6 +25,7 @@ export class Saving {
   @Column()
   userId: number;
 
-  @Column({ default: false })
-  isDeleted: boolean;
+  // ⬇️ new: automatically updates on each change
+  @UpdateDateColumn({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
+  updatedAt: Date;
 }
