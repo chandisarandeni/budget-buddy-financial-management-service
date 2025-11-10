@@ -19,4 +19,7 @@ export class Saving {
 
   @Column()
   userId: number;
+
+  @Column({ default: false })
+  isDeleted: boolean;
 }

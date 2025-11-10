@@ -11,6 +11,8 @@ export class IncomeService {
     @InjectRepository(Income)
     private readonly incomeRepository: Repository<Income>,
   ) {}
+
+  // ADD NEW INCOME
   create(createIncomeDto: CreateIncomeDto) {
     // get source, amount, receivedDate and userId
     if (
@@ -29,6 +31,7 @@ export class IncomeService {
     return this.incomeRepository.save(income);
   }
 
+  // GET ALL INCOMES
   findAll() {
     return this.incomeRepository.find();
   }
@@ -38,10 +41,18 @@ export class IncomeService {
     return this.incomeRepository.find({ where: { userId } });
   }
 
+  // GET ALL NON-DELETED INCOMES
+  findAllNonDeleted() {
+    return this.incomeRepository.find({ where: { isDeleted: false } });
+  }
+
+  // GET INCOME BY ID
   findOne(id: number) {
     return this.incomeRepository.findOneBy({ id });
   }
 
+
+  // UPDATE INCOME BY ID
   update(id: number, updateIncomeDto: UpdateIncomeDto) {
     // check if income exists
     if (!this.incomeRepository.findOneBy({ id })) {
@@ -56,6 +67,7 @@ export class IncomeService {
     return this.incomeRepository.findOneBy({ id });
   }
 
+  // DELETE INCOME BY ID
   remove(id: number) {
     if (!this.incomeRepository.findOneBy({ id })) {
       return {
