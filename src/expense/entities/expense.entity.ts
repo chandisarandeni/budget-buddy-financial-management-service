@@ -22,4 +22,7 @@ export class Expense {
 
   @Column({ type: 'int' })
   userId: number;
+
+  @Column({ default: false })
+  isDeleted: boolean;
 }
