@@ -48,11 +48,6 @@ export class ExpenseService {
     return this.expenseRepository.find({ where: { userId } });
   }
 
-  // GET ALL NON-DELETED EXPENSES
-  findAllNonDeleted() {
-    return this.expenseRepository.find({ where: { isDeleted: false } });
-  }
-
   // GET EXPENSE BY ID
   findOne(id: number) {
     return this.expenseRepository.findOneBy({ id });
