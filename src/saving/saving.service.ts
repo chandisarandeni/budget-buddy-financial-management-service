@@ -42,6 +42,11 @@ export class SavingService {
     return this.savingRepository.find({ where: { userId } });
   }
 
+  // GET ALL NON-DELETED SAVINGS
+  findAllNonDeleted() {
+    return this.savingRepository.find({ where: { isDeleted: false } });
+  }
+
   // GET SAVING BY ID
   findOne(id: number) {
     return this.savingRepository.findOneBy({ id });
