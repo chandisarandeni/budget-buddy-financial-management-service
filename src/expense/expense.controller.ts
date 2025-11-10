@@ -33,6 +33,12 @@ export class ExpenseController {
     return this.expenseService.findByUserId(+userId);
   }
 
+  // GET ALL NON-DELETED EXPENSES
+  @Get('non-deleted')
+  findAllNonDeleted() {
+    return this.expenseService.findAllNonDeleted();
+  }
+
   // GET EXPENSE BY ID
   @Get(':id')
   findOne(@Param('id') id: string) {

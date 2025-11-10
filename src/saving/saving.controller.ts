@@ -33,6 +33,12 @@ export class SavingController {
     return this.savingService.findByUserId(+userId);
   }
 
+  // GET ALL NON-DELETED SAVINGS
+  @Get('non-deleted')
+  findAllNonDeleted() {
+    return this.savingService.findAllNonDeleted();
+  }
+
   // GET SAVING BY ID
   @Get(':id')
   findOne(@Param('id') id: string) {
