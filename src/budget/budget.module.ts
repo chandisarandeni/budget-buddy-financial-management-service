@@ -3,9 +3,10 @@ import { BudgetService } from './budget.service';
 import { BudgetController } from './budget.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Budget } from './entities/budget.entity';
+import { SyncModule } from './sync/sync.module';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Budget])],
+  imports: [TypeOrmModule.forFeature([Budget]), SyncModule],
   controllers: [BudgetController],
   providers: [BudgetService],
 })
