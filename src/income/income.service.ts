@@ -41,11 +41,6 @@ export class IncomeService {
     return this.incomeRepository.find({ where: { userId } });
   }
 
-  // GET ALL NON-DELETED INCOMES
-  findAllNonDeleted() {
-    return this.incomeRepository.find({ where: { isDeleted: false } });
-  }
-
   // GET INCOME BY ID
   findOne(id: number) {
     return this.incomeRepository.findOneBy({ id });
