@@ -40,11 +40,6 @@ export class BudgetService {
     return this.budgetRepository.find({ where: { userId } });
   }
 
-  // GET ALL NON-DELETED BUDGETS
-  findAllNonDeleted() {
-    return this.budgetRepository.find({ where: { isDeleted: false } });
-  }
-
   // GET A BUDGET BY ID
   findOne(id: number) {
     return this.budgetRepository.findOneBy({ id });

@@ -33,12 +33,6 @@ export class BudgetController {
     return this.budgetService.findByUserId(+userId);
   }
 
-  // GET ALL NON-DELETED BUDGETS
-  @Get('non-deleted')
-  findAllNonDeleted() {
-    return this.budgetService.findAllNonDeleted();
-  }
-
   // GET A BUDGET BY ID
   @Get(':id')
   findOne(@Param('id') id: string) {
