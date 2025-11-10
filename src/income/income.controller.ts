@@ -33,12 +33,6 @@ export class IncomeController {
     return this.incomeService.findByUserId(+userId);
   }
 
-  // GET ALL NON-DELETED INCOMES
-  @Get('non-deleted')
-  findAllNonDeleted() {
-    return this.incomeService.findAllNonDeleted();
-  }
-
   // GET INCOME BY ID
   @Get(':id')
   findOne(@Param('id') id: string) {

@@ -7,4 +7,7 @@ export class UpdateIncomeDto extends PartialType(CreateIncomeDto) {
   amount: number;
   dateReceived: Date;
   userId: number;
+
+  // For sync purposes
+  updatedAt?: Date;
 }
