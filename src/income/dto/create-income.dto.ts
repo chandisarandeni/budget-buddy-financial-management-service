@@ -3,4 +3,7 @@ export class CreateIncomeDto {
   amount: number;
   receivedDate: Date;
   userId: number;
+
+  // For sync purposes
+  updatedAt?: Date;
 }
