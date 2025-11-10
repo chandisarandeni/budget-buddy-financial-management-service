@@ -22,4 +22,7 @@ export class Budget {
 
   @Column()
   userId: number;
+
+  @Column({ default: false })
+  isDeleted: boolean;
 }

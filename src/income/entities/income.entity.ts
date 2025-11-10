@@ -17,7 +17,9 @@ export class Income {
   @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   createdDate: Date;
 
-  // foreign key to users table
   @Column()
   userId: number;
+
+  @Column({ default: false })
+  isDeleted: boolean;
 }
