@@ -3,7 +3,7 @@ import { CreateSavingDto } from './dto/create-saving.dto';
 import { UpdateSavingDto } from './dto/update-saving.dto';
 import { Saving } from './entities/saving.entity';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { Between, Repository } from 'typeorm';
 
 @Injectable()
 export class SavingService {
@@ -40,6 +40,18 @@ export class SavingService {
   // FIND SAVING BY USER ID
   findByUserId(userId: number) {
     return this.savingRepository.find({ where: { userId } });
+  }
+
+  // GET MONTHLY BUDGETS BY USER ID -> Pass Month and Year as well
+  findMonthlyByUserId(userId: number, month: number, year: number) {
+    const startDate = new Date(year, month - 1, 1);
+    const endDate = new Date(year, month, 0, 23, 59, 59, 999);
+    return this.savingRepository.find({
+      where: {
+        userId,
+        createdAt: Between(startDate, endDate),
+      },
+    });
   }
 
   // GET SAVING BY ID
