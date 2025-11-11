@@ -33,6 +33,16 @@ export class BudgetController {
     return this.budgetService.findByUserId(+userId);
   }
 
+  // GET MONTHLY BUDGETS BY USER ID' -> Pass Month and Year as well
+  @Get('user/:userId/month/:month/year/:year')
+  findMonthlyByUserId(
+    @Param('userId') userId: string,
+    @Param('month') month: string,
+    @Param('year') year: string,
+  ) {
+    return this.budgetService.findMonthlyByUserId(+userId, +month, +year);
+  }
+
   // GET A BUDGET BY ID
   @Get(':id')
   findOne(@Param('id') id: string) {
