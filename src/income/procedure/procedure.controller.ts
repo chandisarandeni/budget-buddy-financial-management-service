@@ -8,60 +8,52 @@ import {
   Param,
   Query,
   ParseIntPipe,
-  HttpStatus,
 } from '@nestjs/common';
 import { ProcedureService } from './procedure.service';
-import { CreateBudgetDto } from '../dto/create-budget.dto';
-import { UpdateBudgetDto } from '../dto/update-budget.dto';
+import { CreateIncomeDto } from '../dto/create-income.dto';
+import { UpdateIncomeDto } from '../dto/update-income.dto';
 
-@Controller('budgets/procedure')
-export class BudgetProcedureController {
+@Controller('expenses/procedure')
+export class ExpenseProcedureController {
   constructor(private readonly procedureService: ProcedureService) {}
 
-  // CREATE BUDGET
   @Post()
-  async create(@Body() createBudgetDto: CreateBudgetDto) {
-    return await this.procedureService.create(createBudgetDto);
+  async create(@Body() createIncomeDto: CreateIncomeDto) {
+    return await this.procedureService.create(createIncomeDto);
   }
 
-  // GET ALL BUDGETS
   @Get()
   async findAll() {
     return await this.procedureService.findAll();
   }
 
-  // GET BUDGET BY ID
   @Get(':id')
   async findOne(@Param('id', ParseIntPipe) id: number) {
     return await this.procedureService.findOne(id);
   }
 
-  // GET BUDGETS BY USER ID
   @Get('user/:userId')
   async findByUserId(@Param('userId', ParseIntPipe) userId: number) {
     return await this.procedureService.findByUserId(userId);
   }
 
-  // GET MONTHLY BUDGETS BY USER ID
   @Get('user/:userId/monthly')
-  async getMonthlyBudgets(
+  async getMonthlyExpenses(
     @Param('userId', ParseIntPipe) userId: number,
     @Query('month', ParseIntPipe) month: number,
     @Query('year', ParseIntPipe) year: number,
   ) {
-    return await this.procedureService.getMonthlyBudgets(userId, month, year);
+    return await this.procedureService.getMonthlyIncomes(userId, month, year);
   }
 
-  // UPDATE BUDGET
   @Put(':id')
   async update(
     @Param('id', ParseIntPipe) id: number,
-    @Body() updateBudgetDto: UpdateBudgetDto,
+    @Body() updateIncomeDto: UpdateIncomeDto,
   ) {
-    return await this.procedureService.update(id, updateBudgetDto);
+    return await this.procedureService.update(id, updateIncomeDto);
   }
 
-  // DELETE BUDGET
   @Delete(':id')
   async remove(
     @Param('id', ParseIntPipe) id: number,

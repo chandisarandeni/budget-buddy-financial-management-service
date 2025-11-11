@@ -2,11 +2,11 @@ import { Module } from '@nestjs/common';
 import { ProcedureService } from './procedure.service';
 import { ProcedureController } from '../../saving/procedures/procedure.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Budget } from '../entities/budget.entity';
+import { Income } from '../entities/income.entity';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Budget])],
+  imports: [TypeOrmModule.forFeature([Income])],
   controllers: [ProcedureController],
-  providers: [ProcedureService],
+  providers: [],
 })
 export class ProcedureModule {}
