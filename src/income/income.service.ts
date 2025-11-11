@@ -3,7 +3,7 @@ import { CreateIncomeDto } from './dto/create-income.dto';
 import { UpdateIncomeDto } from './dto/update-income.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Income } from './entities/income.entity';
-import { Repository } from 'typeorm';
+import { Between, Repository } from 'typeorm';
 
 @Injectable()
 export class IncomeService {
@@ -41,11 +41,22 @@ export class IncomeService {
     return this.incomeRepository.find({ where: { userId } });
   }
 
+  // GET MONTHLY BUDGETS BY USER ID -> Pass Month and Year as well
+  findMonthlyByUserId(userId: number, month: number, year: number) {
+    const startDate = new Date(year, month - 1, 1);
+    const endDate = new Date(year, month, 0, 23, 59, 59, 999);
+    return this.incomeRepository.find({
+      where: {
+        userId,
+        receivedDate: Between(startDate, endDate),
+      },
+    });
+  }
+
   // GET INCOME BY ID
   findOne(id: number) {
     return this.incomeRepository.findOneBy({ id });
   }
-
 
   // UPDATE INCOME BY ID
   update(id: number, updateIncomeDto: UpdateIncomeDto) {

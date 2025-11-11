@@ -33,6 +33,16 @@ export class SavingController {
     return this.savingService.findByUserId(+userId);
   }
 
+  // GET MONTHLY BUDGETS BY USER ID' -> Pass Month and Year as well
+  @Get('user/:userId/month/:month/year/:year')
+  findMonthlyByUserId(
+    @Param('userId') userId: string,
+    @Param('month') month: string,
+    @Param('year') year: string,
+  ) {
+    return this.savingService.findMonthlyByUserId(+userId, +month, +year);
+  }
+
   // GET SAVING BY ID
   @Get(':id')
   findOne(@Param('id') id: string) {
