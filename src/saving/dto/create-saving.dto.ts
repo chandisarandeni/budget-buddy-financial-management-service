@@ -3,4 +3,5 @@ export class CreateSavingDto {
   targetAmount: number;
   currentAmount?: number;
   userId: number;
+  targetDate?: string;
 }
