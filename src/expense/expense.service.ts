@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { CreateExpenseDto } from './dto/create-expense.dto';
 import { UpdateExpenseDto } from './dto/update-expense.dto';
 import { Expense } from './entities/expense.entity';
-import { Repository } from 'typeorm';
+import { Between, LessThanOrEqual, Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 
 @Injectable()
@@ -46,6 +46,18 @@ export class ExpenseService {
   // FIND EXPENSE BY USER ID
   findByUserId(userId: number) {
     return this.expenseRepository.find({ where: { userId } });
+  }
+
+  // GET MONTHLY BUDGETS BY USER ID -> Pass Month and Year as well
+  findMonthlyByUserId(userId: number, month: number, year: number) {
+    const startDate = new Date(year, month - 1, 1);
+    const endDate = new Date(year, month, 0, 23, 59, 59, 999);
+    return this.expenseRepository.find({
+      where: {
+        userId,
+        expenseDate: Between(startDate, endDate),
+      },
+    });
   }
 
   // GET EXPENSE BY ID
