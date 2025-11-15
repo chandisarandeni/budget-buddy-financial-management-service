@@ -16,8 +16,7 @@ import { BudgetModule } from './budget/budget.module';
 
     // Oracle Database Connection (with serviceName)
     TypeOrmModule.forRootAsync({
-      useFactory: (): 
-      DataSourceOptions => ({
+      useFactory: (): DataSourceOptions => ({
         type: 'oracle',
         host: process.env.ORACLE_HOST,
         port: Number(process.env.ORACLE_PORT),
